@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductService } from '../../../services/product.service'
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  //สร้างตัวแปรมารับค่าจาก API
+  dataProduct:any=[];
+
+  constructor(private api:ProductService) { }
 
   ngOnInit(): void {
+    this.api.getProduct().subscribe((data:{})=>{
+      console.log(data);
+      this.dataProduct = data;
+    });
   }
 
 }
